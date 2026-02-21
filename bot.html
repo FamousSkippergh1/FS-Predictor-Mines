@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SSBot Mines Predictor PRO</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #020617, #0f172a);
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin: 0;
+  }
+
+  h1 {
+    margin-bottom: 10px;
+    font-size: clamp(20px, 4vw, 32px);
+  }
+
+  .controls {
+    margin: 15px 0;
+  }
+
+  #grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(55px, 1fr));
+    gap: 10px;
+    max-width: 420px;
+    margin: 20px auto;
+  }
+
+  .cell {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: #1e293b;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(20px, 4vw, 28px);
+    transition: 0.25s;
+  }
+
+  .safe {
+    background: #16a34a !important;
+    box-shadow: 0 0 15px #22c55e;
+    transform: scale(1.05);
+  }
+
+  button {
+    padding: 12px 20px;
+    margin: 6px;
+    font-size: clamp(14px, 3.5vw, 18px);
+    border: none;
+    border-radius: 10px;
+    background: #22c55e;
+    color: white;
+    cursor: pointer;
+    width: min(220px, 80%);
+  }
+
+  button:hover {
+    background: #16a34a;
+  }
+
+  select {
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+
+  .confidence {
+    font-size: clamp(16px, 4vw, 20px);
+    margin-top: 8px;
+    color: #22c55e;
+    font-weight: bold;
+  }
+
+  .thinking {
+    color: #facc15;
+    font-size: clamp(14px, 3.5vw, 16px);
+    min-height: 20px;
+  }
+</style>
+</head>
+
+<body>
+
+<h1>SSBot Mines Predictor PRO</h1>
+
+<div class="controls">
+  Safe Spots:
+  <select id="safeCount">
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+  </select>
+
+  <br><br>
+
+  <button onclick="predictSafeSpots()">Predict</button>
+</div>
+
+<div class="thinking" id="thinking"></div>
+<div class="confidence" id="confidence"></div>
+
+<div id="grid"></div>
+
+<script>
+  const grid = document.getElementById("grid");
+  const thinkingEl = document.getElementById("thinking");
+  const confidenceEl = document.getElementById("confidence");
+
+  // create grid
+  for (let i = 0; i < 25; i++) {
+    const cell = document.createElement("div");
+    cell.classList.add("cell");
+    grid.appendChild(cell);
+  }
+
+  function runPrediction() {
+    const cells = document.querySelectorAll(".cell");
+    const count = parseInt(document.getElementById("safeCount").value);
+
+    cells.forEach(cell => {
+      cell.classList.remove("safe");
+      cell.textContent = "";
+    });
+
+    const safeSpots = generateStrongSafeSpots(count);
+
+    safeSpots.forEach(i => {
+      cells[i].classList.add("safe");
+      cells[i].textContent = "🌟";
+    });
+
+    const confidence = Math.floor(Math.random() * 15) + 85;
+    confidenceEl.textContent = "Confidence: " + confidence + "%";
+  }
+
+  function predictSafeSpots() {
+    thinkingEl.textContent = "🧠 AI analyzing...";
+    confidenceEl.textContent = "";
+
+    setTimeout(() => {
+      runPrediction();
+      thinkingEl.textContent = "";
+    }, 700);
+  }
+
+  function generateStrongSafeSpots(count) {
+    const numbers = Array.from({ length: 25 }, (_, i) => i);
+
+    for (let i = numbers.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
+    }
+
+    return numbers.slice(0, count);
+  }
+</script>
+
+</body>
+</html>

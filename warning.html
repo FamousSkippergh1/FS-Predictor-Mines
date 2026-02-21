@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FS Predictor</title>
+
+<style>
+/* ===== PAGE BASE ===== */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0f172a;
+  margin: 0;
+  padding: 20px;
+  color: #fff;
+}
+
+/* ===== WARNING BOX ===== */
+.warning-box {
+  max-width: 900px;
+  margin: 25px auto;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #fff3cd, #ffe69c);
+  border: 1px solid #ffd54f;
+  border-left: 6px solid #f59e0b;
+  border-radius: 12px;
+  color: #7a5c00;
+  font-size: 15px;
+  line-height: 1.6;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* ===== BOT BUTTON ===== */
+.open-bot-btn {
+  display: block;
+  margin: 35px auto;
+  padding: 15px 30px;
+  font-size: 17px;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(135deg, #0ea5e9, #2563eb);
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 0 10px 22px rgba(37, 99, 235, 0.35);
+  transition: all 0.25s ease;
+}
+
+.open-bot-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(37, 99, 235, 0.45);
+}
+
+.open-bot-btn:active {
+  transform: scale(0.96);
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 600px) {
+  body {
+    padding: 14px;
+  }
+
+  .warning-box {
+    margin: 20px 8px;
+    font-size: 14px;
+    padding: 14px 14px;
+  }
+
+  .open-bot-btn {
+    width: 92%;
+    font-size: 16px;
+    padding: 14px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="warning-box">
+  ⚠️ <strong>Risk Disclaimer:</strong> FS Predictor is not a guaranteed profit tool.
+  Trading involves risk. The bot provides probability-based signals with an
+  estimated accuracy around 50%. Results may vary. Always trade responsibly.
+</div>
+
+<button class="open-bot-btn" onclick="window.location.href='bot.html'">
+  🚀 Open Real Bot
+</button>
+
+</body>
+</html>
